@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: three-tier
+  labels:
+    role: api
+    env: demo
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      role: api
+  template:
+    metadata:
+      labels:
+        role: api
+    spec:
+      imagePullSecrets:
+      - name: ecr-registry-secret
+      containers:
+      - name: api
+        image: 443370706049.dkr.ecr.us-east-1.amazonaws.com/backend:30
+        imagePullPolicy: Always
+        env:
+          - name: MONGO_CONN_STR
+            value: "mongodb://localhost:27017/projet_memoire"
+        ports:
+        - containerPort: 5000

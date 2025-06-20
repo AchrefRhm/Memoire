@@ -5,7 +5,7 @@ metadata:
   namespace: three-tier
   labels:
     role: api
-    env: demo
+    env: prod
 spec:
   replicas: 4
   strategy:
@@ -22,13 +22,23 @@ spec:
         role: api
     spec:
       imagePullSecrets:
-      - name: ecr-registry-secret
+        - name: ecr-registry-secret
       containers:
-      - name: api
-        image: 443370706049.dkr.ecr.us-east-1.amazonaws.com/backend:3
-        imagePullPolicy: Always
-        env:
-          - name: MONGO_CONN_STR
-            value: "mongodb://mongodb-svc:27017/projet_memoire"
-        ports:
-        - containerPort: 5000
+        - name: api
+          image: 443370706049.dkr.ecr.us-east-1.amazonaws.com/backend:3
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-sec
+                  key: username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-sec
+                  key: password
+            - name: MONGO_CONN_STR
+              value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb-svc:27017/projet_memoire?authSource=admin"
+          ports:
+            - containerPort: 5000

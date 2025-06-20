@@ -5,7 +5,7 @@ metadata:
   namespace: three-tier
   labels:
     role: frontend
-    env: demo
+    env: prod
 spec: 
   replicas: 1
   strategy:

@@ -29,6 +29,6 @@ spec:
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
-            value: "mongodb://localhost:27017/projet_memoire"
+            value: "mongodb://mongodb-svc:27017/projet_memoire"
         ports:
         - containerPort: 5000

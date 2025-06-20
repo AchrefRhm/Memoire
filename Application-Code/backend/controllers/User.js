@@ -1,6 +1,5 @@
 const User = require("../models/User.js");
 const bcrypt = require("bcryptjs");
-const Stripe = require("stripe");
 const axios = require("axios");
 require("dotenv").config();
 const { createError } = require("../utils/error.js");
@@ -8,7 +7,6 @@ const { generateToken } = require("../config/generateToken.js");
 const multer = require("multer");
 const path = require("path");
 const Payment = require("../models/Payment.js");
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const register = async (req, res, next) => {
   try {
     const salt = bcrypt.genSaltSync(10);

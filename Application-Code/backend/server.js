@@ -21,8 +21,11 @@ initializeSocket(server);
 
 // Middleware
 app.use(express.json());
-app.use(cors());
-
+app.use(cors({
+  origin: ['http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com'],
+  methods: ['GET','POST','PUT','DELETE'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
 const uploadsPath = path.join(__dirname, "/uploads");
 console.log("Uploads directory path:", uploadsPath);
 app.use("/uploads", express.static(uploadsPath));

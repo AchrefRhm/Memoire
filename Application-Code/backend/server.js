@@ -22,7 +22,7 @@ initializeSocket(server);
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ['http://k8s-threetie-mainlb-11c5700e30-87727882.us-east-1.elb.amazonaws.com'],
+  origin: ['http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com'],
   methods: ['GET','POST','PUT','DELETE'],
   allowedHeaders: ['Content-Type','Authorization']
 }));

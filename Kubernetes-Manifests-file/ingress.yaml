@@ -7,19 +7,19 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    # Add these new annotations:
-    alb.ingress.kubernetes.io/conditions.api: |
-      [{
-        "field":"path-pattern",
-        "pathPatternConfig":{
-          "values":["/api/*"]
-        }
-      }]
+    alb.ingress.kubernetes.io/healthcheck-path: /api/health
 spec:
   ingressClassName: alb
   rules:
   - http:
       paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api
+            port:
+              number: 5000
       - path: /
         pathType: Prefix
         backend:
@@ -27,11 +27,3 @@ spec:
             name: frontend
             port:
               number: 3000
-      # Add this new rule for API routes
-      - path: /api/*
-        pathType: Prefix
-        backend:
-          service:
-            name: api
-            port:
-              number: 5000

@@ -4,19 +4,34 @@ metadata:
   name: mainlb
   namespace: three-tier
   annotations:
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # Add these new annotations:
+    alb.ingress.kubernetes.io/conditions.api: |
+      [{
+        "field":"path-pattern",
+        "pathPatternConfig":{
+          "values":["/api/*"]
+        }
+      }]
 spec:
   ingressClassName: alb
   rules:
   - http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: frontend
-              port:
-                number: 3000
-
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 3000
+      # Add this new rule for API routes
+      - path: /api/*
+        pathType: Prefix
+        backend:
+          service:
+            name: api
+            port:
+              number: 5000

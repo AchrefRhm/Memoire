@@ -38,7 +38,11 @@ spec:
                 secretKeyRef:
                   name: mongo-sec
                   key: password
-            - name: MONGO_CONN_STR
-              value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb-svc:27017/projet_memoire?authSource=admin"
+            - name: MONGO_HOST
+              value: "mongodb-svc"
+            - name: MONGO_DB
+              value: "projet_memoire"
+            - name: USE_DB_AUTH
+              value: "true"
           ports:
             - containerPort: 5000

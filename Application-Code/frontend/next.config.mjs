@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["i.ibb.co", "localhost"],
+    domains: [
+      "i.ibb.co", // example image CDN
+      "localhost", // local dev
+      "k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com", // your AWS ALB domain
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,
@@ -10,8 +14,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*", // matches /api/anything
-        destination: "http://localhost:5000/api/:path*", // rewrites to your backend
+        source: "/api/:path*", // e.g. /api/users
+        destination: "http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com/api/:path*", // rewrites to backend via ALB
       },
     ];
   },

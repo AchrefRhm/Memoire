@@ -106,45 +106,6 @@ const getQuizById = async (req, res) => {
   }
 };
 
-// const submitQuiz = async (req, res) => {
-//   try {
-//     const { user, quizId, answers } = req.body;
-
-//     // Find the quiz
-//     const quiz = await Quiz.findById(quizId);
-//     if (!quiz) {
-//       return res.status(404).json({ error: "Quiz not found" });
-//     }
-
-//     // Validate if the user's answers match the correct answers
-//     const processedAnswers = answers.map((answer, index) => {
-//       const correctAnswer = quiz.questions[index]?.correctAnswer;
-//       return {
-//         question: quiz.questions[index]?.question || "",
-//         selectedOption: answer.selectedOption,
-//         isCorrect: correctAnswer.includes(answer.selectedOption),
-//       };
-//     });
-
-//     // Calculate the score
-//     const score = processedAnswers.filter((a) => a.isCorrect).length;
-
-//     // Save the user's answers
-//     const newQuizAnswer = new QuizAnswer({
-//       user,
-//       quiz: quizId,
-//       answers: processedAnswers,
-//       score,
-//     });
-
-//     await newQuizAnswer.save();
-
-//     res.status(201).json({ message: "Quiz submitted successfully", score });
-//   } catch (error) {
-//     console.error("Quiz Submission Error:", error.message);
-//     res.status(500).json({ error: "Failed to submit quiz" });
-//   }
-// };
 
 const getQuizAnswerById = async (req, res) => {
   try {

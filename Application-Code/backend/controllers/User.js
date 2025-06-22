@@ -197,17 +197,7 @@ const ConfirmSubscription = async (req, res) => {
     endDate.setDate(startDate.getDate() + durationInDays);
 
     const user = await User.findOne({ email });
-    // const user = await User.findOneAndUpdate(
-    //   { email },
-    //   {
-    //     subs: plan,
-    //     subscriptionStart: startDate,
-    //     subscriptionEnd: endDate,
-    //   },
-    //   { new: true }
-    // );
 
-    // Record the payment
     const previousPlan = user.subs || "free";
     const amount = PLAN_AMOUNTS[plan];
 

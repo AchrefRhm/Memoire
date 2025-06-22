@@ -29,7 +29,7 @@ const AddNewInterview = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      const response = await axios.post("http://localhost:5000/api/interview", {
+      const response = await axios.post("http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com/api/interview", {
         job: user?.job,
         description,
         yearsOfExperience,

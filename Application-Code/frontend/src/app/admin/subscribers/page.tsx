@@ -286,7 +286,7 @@ const SubscribersPage = () => {
                                 src={
                                   subscriber.img.startsWith("https")
                                     ? subscriber.img
-                                    : `http://localhost:5000${subscriber.img}`
+                                    : `http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com${subscriber.img}`
                                 }
                                 alt=" Avatar"
                                 className="h-full w-full rounded-full"

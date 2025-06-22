@@ -64,7 +64,7 @@ const UserPaymentHistory = ({ params }: PageProps) => {
     if (!email) return;
 
     fetchData(
-      `http://localhost:5000/api/payment/get-userPaymentHistory/${email}`,
+      `http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com/payment/get-userPaymentHistory/${email}`,
     )
       .then((res) => {
         setPaymentHistory(res.history || []);

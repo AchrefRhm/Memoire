@@ -43,7 +43,7 @@ const assignBadges = async (req, res) => {
         });
 
         if (!existingBadge) {
-          var badge = new Badge({ userId, type: "50_points" });
+          const badge = new Badge({ userId, type: "50_points" });
           await badge.save();
           sendNotificationToUser(userId, "newBadge", badge);
         }

@@ -103,7 +103,7 @@ const PaymentSuccessPage = () => {
 
   useEffect(() => {
     if (email && serviceId) {
-      axios.post("http://localhost:5000/api/auth/subscriptions/confirm", {
+      axios.post("http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com/api/auth/subscriptions/confirm", {
         email,
         plan: serviceId,
       });

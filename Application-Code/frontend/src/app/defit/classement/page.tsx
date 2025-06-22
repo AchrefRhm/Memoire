@@ -25,7 +25,7 @@ const RankUsersByJob = () => {
         return "text-gray-500";
     }
   };
-  const API_URL = "http://localhost:5000";
+  const API_URL = "http://k8s-threetie-mainlb-11c5700e30-1182053200.us-east-1.elb.amazonaws.com";
   const getImageSource = (userImage) => {
     // Make sure the path is correctly formatted
     return userImage?.img.startsWith("https")
